@@ -44,9 +44,11 @@ public class AgentFab extends FragmentFloatingButton implements AgentWatcher.Lis
     private int badgeCount;
     private boolean generating;
     private long lastFrame;
+    private final Theme.ResourcesProvider rp;
 
     public AgentFab(@NonNull Context context, Theme.ResourcesProvider resourcesProvider) {
         super(context, resourcesProvider);
+        this.rp = resourcesProvider;
         // MD3 squircle instead of a circle
         setOutlineProvider(ViewOutlineProviderImpl.boundsWithPaddingRoundRect(0, dp(16)));
         imageView.setImageDrawable(spark);
@@ -119,11 +121,11 @@ public class AgentFab extends FragmentFloatingButton implements AgentWatcher.Lis
     @Override
     public void updateColors() {
         super.updateColors();
-        int iconColor = Theme.getColor(Theme.key_chats_actionIcon, resourcesProvider);
-        int badgeBg = Theme.getColor(Theme.key_featuredStickers_addButtonPressed, resourcesProvider);
+        int iconColor = Theme.getColor(Theme.key_chats_actionIcon, rp);
+        int badgeBg = Theme.getColor(Theme.key_featuredStickers_addButtonPressed, rp);
         spark.setColor(iconColor);
         badgePaint.setColor(ColorUtils.setAlphaComponent(badgeBg, 255));
-        badgeTextPaint.setColor(Theme.getColor(Theme.key_chats_actionIcon, resourcesProvider));
+        badgeTextPaint.setColor(Theme.getColor(Theme.key_chats_actionIcon, rp));
         pulsePaint.setColor(iconColor);
         pulsePaint.setStyle(Paint.Style.STROKE);
         pulsePaint.setStrokeWidth(dp(2));

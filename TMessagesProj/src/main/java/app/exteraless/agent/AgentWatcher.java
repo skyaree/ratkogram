@@ -140,7 +140,7 @@ public final class AgentWatcher {
 
             // only incoming messages
             StringBuilder incoming = new StringBuilder();
-            int selfId = UserConfig.getInstance(watch.account).getClientUserId();
+            long selfId = UserConfig.getInstance(watch.account).getClientUserId();
             for (org.telegram.tgnet.TLRPC.Message message : history.messages) {
                 if (message.out || message.id <= previous) {
                     continue;

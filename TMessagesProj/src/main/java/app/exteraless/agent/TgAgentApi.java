@@ -266,7 +266,7 @@ public final class TgAgentApi {
     }
 
     /** Transcribes loaded history into a compact chat log for the model. */
-    public static String transcript(int account, HistoryResult history, int selfUserId) {
+    public static String transcript(int account, HistoryResult history, long selfUserId) {
         if (history == null || history.messages.isEmpty()) {
             return "(no messages)";
         }

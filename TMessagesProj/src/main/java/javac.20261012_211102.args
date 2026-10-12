@@ -1,0 +1,12 @@
+-encoding
+UTF-8
+-proc:none
+-nowarn
+-implicit:none
+-d
+/tmp/opencode/out
+-cp
+/opt/android-sdk/platforms/android-34/android.jar:/tmp/opencode/ajars/okhttp-4.12.0.jar:/tmp/opencode/ajars/okio-jvm-3.6.0.jar:/tmp/opencode/ajars/gson-2.10.1.jar:/tmp/opencode/ajars/annotation-1.8.0.jar:/tmp/opencode/ajars/collection-1.4.4.jar:/tmp/opencode/ajars/androidx-core-1.13.1.jar:/tmp/opencode/ajars/kotlin-stdlib-2.0.0.jar
+-sourcepath
+.
+@/tmp/opencode/mysrc.txt
