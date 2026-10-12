@@ -95,7 +95,16 @@ jobs:
           export LOCAL_PROPERTIES="${{ secrets.LOCAL_PROPERTIES }}"
           export BUILD_TIMESTAMP=$(date +%s)
           echo "build_timestamp=$BUILD_TIMESTAMP" >> "$GITHUB_OUTPUT"
-          ./gradlew TMessagesProj:assembleRelease
+          set -o pipefail
+          ./gradlew TMessagesProj:assembleRelease 2>&1 | tee gradle_build.log
+      - name: Diagnose gradle failure
+        if: failure()
+        run: |
+          echo "---- последние строки лога ----"
+          grep -nE "FAILURE|error:|error line|Exception|Caused by:?|SyntaxError|ModuleNotFound|not found|Unable|Could not|failed" gradle_build.log | grep -v "^.*Note:" | tail -60 | while IFS= read -r line; do
+            msg=$(echo "$line" | cut -c1-240)
+            echo "::error::${msg}"
+          done
       - name: Upload arm64-v8a Artifact
         uses: actions/upload-artifact@v7
         with:
