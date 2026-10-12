@@ -1204,6 +1204,9 @@ public class LoginActivity extends BaseFragment implements NotificationCenter.No
 
     @Override
     public void onActivityResultFragment(int requestCode, int resultCode, Intent data) {
+        if (app.exteraless.sessionimport.SessionImportSheet.handleActivityResult(requestCode, resultCode, data)) {
+            return;
+        }
         LoginActivityRegisterView registerView = (LoginActivityRegisterView) views[VIEW_REGISTER];
         if (registerView != null) {
             registerView.imageUpdater.onActivityResult(requestCode, resultCode, data);
@@ -2564,6 +2567,23 @@ public class LoginActivity extends BaseFragment implements NotificationCenter.No
                 if (!testBackend) {
                     testBackendCheckBox.setVisibility(GONE);
                 }
+            }
+
+            if (activityMode == MODE_LOGIN) {
+                TextView importSessionView = new TextView(context);
+                importSessionView.setTextSize(TypedValue.COMPLEX_UNIT_DIP, 14);
+                importSessionView.setGravity(Gravity.CENTER);
+                importSessionView.setTypeface(AndroidUtilities.bold());
+                importSessionView.setTextColor(getThemedColor(Theme.key_windowBackgroundWhiteBlueText4));
+                importSessionView.setText("Import session (tdata / Telethon)…");
+                importSessionView.setPadding(0, dp(10), 0, dp(2));
+                addView(importSessionView, LayoutHelper.createLinear(LayoutHelper.MATCH_PARENT, LayoutHelper.WRAP_CONTENT, Gravity.CENTER_HORIZONTAL, 16, 0, 16, 0));
+                importSessionView.setOnClickListener(v -> {
+                    if (getParentActivity() == null) {
+                        return;
+                    }
+                    app.exteraless.sessionimport.SessionImportSheet.open(LoginActivity.this);
+                });
             }
 
             if (bottomMargin > 0 && !AndroidUtilities.isSmallScreen()) {

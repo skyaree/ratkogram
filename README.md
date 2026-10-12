@@ -1,12 +1,12 @@
 <div align="center">
 
-<img src="assets/logo.png" width="128" alt="exteraless">
+<img src="assets/logo.png" width="128" alt="Ratkogram">
 
-# exteraless
+# Ratkogram
 
 Открытая версия exteraGram — с моделью разрешений для плагинов
 
-[![Канал](https://img.shields.io/badge/Telegram-@exteraless-2CA5E0?logo=telegram&logoColor=white)](https://t.me/exteraless)
+[![Канал](https://img.shields.io/badge/Telegram-@ratkogram-2CA5E0?logo=telegram&logoColor=white)](https://t.me/exteraless)
 
 </div>
 
@@ -14,7 +14,7 @@
 
 ## Что это
 
-exteraless — форк [NagramX](https://github.com/risin42/NagramX), в котором возможности
+Ratkogram — форк [NagramX](https://github.com/risin42/NagramX), в котором возможности
 exteraGram реализованы с открытым исходным кодом.
 
 Отдельный упор — **безопасность плагинов**. В exteraGram плагин не ограничен ни в чём;
@@ -24,21 +24,21 @@ exteraGram реализованы с открытым исходным кодо�
 Проект **в бете**: часть возможностей exteraGram ещё не перенесена. Если заметили, что
 каких-то функций не хватает, — откройте issue или напишите в [канал](https://t.me/exteraless?direct).
 
-* Имя пакета: `com.exteraless.app`
+* Имя пакета: `com.ratkogram.app`
 * Что перенесено: экраны настроек, оформление и параметры чатов, иконпаки, полоса
   пилюль (Pill Stack), боковое меню, движок Python-плагинов
 
 ### Ссылки
 
-* Канал: [@exteraless](https://t.me/exteraless)
-* Исходники: [github.com/exteraless/exteraless](https://github.com/exteraless/exteraless)
+* Канал: [@ratkogram](https://t.me/exteraless)
+* Исходники: [github.com/skyaree/ratkogram](https://github.com/skyaree/ratkogram)
 
 ### Сборка
 
 1. Склонировать репозиторий вместе с подмодулями:
 
     ```bash
-    git clone --recursive --shallow-submodules https://github.com/exteraless/exteraless.git exteraless
+    git clone --recursive --shallow-submodules https://github.com/skyaree/ratkogram.git exteraless
     ```
 
     Если репозиторий уже склонирован без подмодулей:
@@ -67,7 +67,7 @@ exteraGram реализованы с открытым исходным кодо�
    отладочным ключом Android.
 
 4. Для push-уведомлений положить свой `TMessagesProj/google-services.json`
-   (Firebase, имя пакета `com.exteraless.app`).
+   (Firebase, имя пакета `com.ratkogram.app`).
 
 5. Заменить метаданные проекта:
 
@@ -116,6 +116,25 @@ AI-агент внутри клиента, оформленный в стиле 
 
 Архитектура инструментов вдохновлена [MD3-Agent](https://github.com/huecoder/MD3-Agent).
 
+### Импорт сессии при входе
+
+Экран входа → «Import session (tdata / Telethon)…». Поддерживается:
+
+* **StringSession Telethon** — вставить строку;
+* **файл `.session`** (Telethon, sqlite);
+* **tdata** — zip-архив папки tdata (без пароля и с локальным passcode).
+
+Экспорт авторизации делает встроенный Telethon (пакет `telethon` в pip), дальше `auth.importAuthorization`
+уходит в нативный клиент без логина — номер и SMS не нужны.
+
+### Про вход по номеру
+
+Сборка по умолчанию использует тестовый `TELEGRAM_APP_ID=6` — сервера
+Telegram его троттлят, вход по SMS может не проходить или «крашить» вход.
+Поставьте свой ключ: в репозитории добавьте секрет `LOCAL_PROPERTIES`
+(base64-кодированный `local.properties` с `TELEGRAM_APP_ID=…`/`TELEGRAM_APP_HASH=…`),
+либо положите `local.properties` при локальной сборке.
+
 ### Авторы дизайна
 
 Иконки и оформление, унаследованные от exteraGram, созданы его дизайнером —
@@ -140,7 +159,7 @@ AI-агент внутри клиента, оформленный в стиле 
 
 ### What this is
 
-exteraless is a fork of [NagramX](https://github.com/risin42/NagramX) that implements
+Ratkogram is a fork of [NagramX](https://github.com/risin42/NagramX) that implements
 exteraGram's features open-source.
 
 The special focus is **plugin security**. In exteraGram a plugin is not restricted in
@@ -150,7 +169,7 @@ needs, you see that on the install sheet, and it gets only what was declared.
 The project is **in beta**: some exteraGram features have not been ported yet. If you
 notice a missing feature, open an issue or write to the [channel](https://t.me/exteraless?direct).
 
-* Package name: `com.exteraless.app`
+* Package name: `com.ratkogram.app`
 
 ### Design credits
 
@@ -163,7 +182,7 @@ studio. Rights to those materials belong to their authors.
 1. Clone with submodules:
 
     ```bash
-    git clone --recursive --shallow-submodules https://github.com/exteraless/exteraless.git exteraless
+    git clone --recursive --shallow-submodules https://github.com/skyaree/ratkogram.git exteraless
     ```
 
 2. Get `TELEGRAM_APP_ID` and `TELEGRAM_APP_HASH` from [my.telegram.org](https://my.telegram.org/auth)
@@ -174,7 +193,7 @@ studio. Rights to those materials belong to their authors.
    shipped with the repository; without one the build is signed with the Android debug key.
 
 4. For push notifications, replace `TMessagesProj/google-services.json` with your own
-   Firebase config for `com.exteraless.app`.
+   Firebase config for `com.ratkogram.app`.
 
 5. Build with `./gradlew :TMessagesProj:assembleDebug` or from Android Studio.
 
