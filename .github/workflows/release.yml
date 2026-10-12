@@ -100,8 +100,7 @@ jobs:
       - name: Diagnose gradle failure
         if: failure()
         run: |
-          echo "---- последние строки лога ----"
-          grep -nE "FAILURE|error:|error line|Exception|Caused by:?|SyntaxError|ModuleNotFound|not found|Unable|Could not|failed" gradle_build.log | grep -v "^.*Note:" | tail -60 | while IFS= read -r line; do
+          grep -n -A 3 -E "error:|FAILURE: Build failed|Caused by|SyntaxError|ModuleNotFound" gradle_build.log | grep -v "^--$" | grep -v "Note:" | tail -150 | while IFS= read -r line; do
             msg=$(echo "$line" | cut -c1-240)
             echo "::error::${msg}"
           done
