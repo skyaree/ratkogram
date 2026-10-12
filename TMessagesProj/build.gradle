@@ -148,10 +148,14 @@ android {
                 install 'lxml'
                 install 'packaging'
                 install 'pillow'
-                install 'pyaes'
                 install 'requests'
-                install 'telethon'
                 install 'PyYAML'
+                // RatkoGram: стек импорта сессий. В индексе chaquopy этих пакетов
+                // нет, поэтому колёса лежат локально (python-wheels/).
+                install files('python-wheels/telethon-1.45.0-py3-none-any.whl')
+                install files('python-wheels/pyaes-1.6.1-py3-none-any.whl')
+                install files('python-wheels/rsa-4.9-py3-none-any.whl')
+                install files('python-wheels/pyasn1-0.6.1-py3-none-any.whl')
             }
         }
 
