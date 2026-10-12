@@ -128,10 +128,10 @@ public class SessionImportSheet extends BottomSheet implements SessionImport.Lis
             topMargin = dp(12);
         }});
 
-        pickRow.addView(chip("Выбрать .session", v -> pickFile(PICK_SESSION_FILE)), pickParams());
+        pickRow.addView(chip("Выбрать .session", v -> pickFile(SessionImport.PICK_SESSION_FILE)), pickParams());
         FrameLayout spacer = new FrameLayout(context);
         pickRow.addView(spacer, new LinearLayout.LayoutParams(dp(8), dp(40)));
-        pickRow.addView(chip("Выбрать tdata (zip)", v -> pickFile(PICK_TDATA_FILE)), pickParams());
+        pickRow.addView(chip("Выбрать tdata (zip)", v -> pickFile(SessionImport.PICK_TDATA_FILE)), pickParams());
 
         // статус
         statusView = new TextView(context);
@@ -212,7 +212,7 @@ public class SessionImportSheet extends BottomSheet implements SessionImport.Lis
     }
 
     private boolean onResult(int requestCode, int resultCode, Intent data) {
-        if ((requestCode != PICK_SESSION_FILE && requestCode != PICK_TDATA_FILE)
+        if ((requestCode != SessionImport.PICK_SESSION_FILE && requestCode != SessionImport.PICK_TDATA_FILE)
                 || data == null || data.getData() == null) {
             return false;
         }
@@ -223,7 +223,7 @@ public class SessionImportSheet extends BottomSheet implements SessionImport.Lis
                 name = nameGuess.replaceAll("[^A-Za-z0-9._-]", "_");
             }
             String path = SessionImport.copyToCache(getContext(), data.getData(), name);
-            if (requestCode == PICK_SESSION_FILE) {
+            if (requestCode == SessionImport.PICK_SESSION_FILE) {
                 sessionFilePath = path;
                 setStatus(".session: " + name);
             } else {
